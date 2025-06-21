@@ -1,6 +1,6 @@
-# Cesium Vue3 Demo
+# peregrine(游隼)
 
-基于 Vue3 + Vite + pinia + Cesium 的三维地球项目。
+基于 Vue3 + Cesium + typescript 的三维地球项目。
 
 ## 功能特性
 
@@ -40,12 +40,13 @@
 
 ## 技术栈
 
-- Vue 3.3.9
-- Vite 5.0.4 
-- Cesium 1.99
-- Element Plus 2.4.3
-- @turf/turf 7.2.0
-- SASS
+- Vue 3.5.13
+- Vite 6.3.5
+- pinia 3.0.3
+- sass 1.89.1
+- Cesium 1.116.0
+- typescript 5.8.3
+- i18next
 
 ## 快速开始
 
@@ -58,21 +59,41 @@
 ## 📁 项目结构
 
 ```
-├── src/
-│ ├── components/ # 组件
-│ │ ├── cesium/ # Cesium相关组件
-│ │ │ ├── CesiumButton.vue
-│ │ │ └── CesiumDropdown.vue
-│ │ └── Map.vue # 地图主组件
-│ ├── utils/ # 工具类
-│ │ ├── cesiumUtils.js # Cesium工具方法
-│ │ ├── measureTools.js # 测量工具类
-│ │ ├── cesiumLocal.js # 本地化工具
-│ │ └── imageryProvider.js # 影像图层提供者
-│ ├── config/ # 配置文件
-│ │ ├── points.json # 点位配置
-│ │ └── tiles.json # 3DTiles配置
-│ └── assets/ # 静态资源
+├── .eslintrc.js          # ESLint配置文件
+├── .gitignore            # Git忽略文件配置
+├── .vscode/              # VSCode配置目录
+│   └── extensions.json
+├── LICENSE               # 许可证文件
+├── README.md             # 项目说明文档
+├── index.html            # 入口HTML文件
+├── package.json          # 项目依赖配置
+├── public/               # 公共资源目录
+│   └── vite.svg
+├── src/                  # 源代码目录
+│   ├── @types/           # TypeScript类型定义目录
+│   ├── App.vue           # 根组件
+│   ├── assets/           # 静态资源目录
+│   │   └── icons/        # 图标资源
+│   ├── components/       # 公共组件目录
+│   │   └── HelloWorld.vue
+│   ├── config/           # 配置文件目录
+│   ├── main.ts           # 入口文件
+│   ├── router/           # 路由配置
+│   │   └── index.ts
+│   ├── store/            # 状态管理
+│   │   └── index.ts
+│   ├── style/            # 样式文件目录
+│   │   ├── common.scss   # 公共样式
+│   │   └── variables.scss # 样式变量
+│   ├── utils/            # 工具函数目录
+│   ├── views/            # 页面组件目录
+│   │   ├── DroneView.vue
+│   │   └── Home.vue
+│   └── vite-env.d.ts     # Vite环境声明文件
+├── tsconfig.app.json     # TypeScript应用配置
+├── tsconfig.json         # TypeScript主配置
+├── tsconfig.node.json    # TypeScript Node配置
+└── vite.config.ts        # Vite配置文件
 ```
 
 ## 🎮 操作说明
@@ -106,14 +127,33 @@ Cesium 相关配置位于 `src/utils/cesiumUtils.js`，包括:
 2. 在 `Map.vue` 中引入并使用
 3. 在 `cesiumUtils.js` 中添加相关工具方法
 
+## <img class="emoji" title=":octocat:" alt=":octocat:" src="https://github.githubassets.com/images/icons/emoji/octocat.png" height="20" width="20" align="absmiddle"> 代码提交规范
 
-## 🤝 贡献指南
+```
+git <type>: <subject>
+git commit -m “feat: 项目初始化”
+```
 
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 提交 Pull Request
+### type 参考:
+
+```
+feat      ✨ 增加新功能（feature）
+fix       🐛 Bug修复
+docs      📖 文档书写改动（documentation）
+style     💎 style修改，代码风格相关无影响运行结果的
+refactor  📦 重构(既不增加新功能, 也不修改bug的代码改动)
+perf      🚀 性能相关优化
+test      🚨 测试相关
+build     👷 影响构建系统或外部依赖的更改（例如：vite，webpack，broccoli，npm）
+ci        🔖 持续集成的配置文件和脚本的变动（例如：Travis，Circle，BrowserStack，SauceLabs）
+chore     🎫 依赖更新/脚手架配置修改等
+revert    🔙 代码撤销修改
+init      🎉 初始化提交
+release   🔖 发布版本
+wip       🚧 正在进行中, 且有可能出现不稳定运行的提交
+config    🔧 修改配置文件
+merge     🔀 合并分支
+```
 
 ## 📄 许可证
 
@@ -123,9 +163,10 @@ Cesium 相关配置位于 `src/utils/cesiumUtils.js`，包括:
 
 - [Vue 3 文档](https://v3.vuejs.org/)
 - [Cesium 文档](https://cesium.com/docs/)
-- [Element Plus 文档](https://element-plus.org/)
+- [typescript](https://www.typescriptlang.org/)
 - [Turf.js 文档](https://turfjs.fenxianglu.cn/)
 
 ## 📧 联系方式
 
 如有问题或建议，欢迎提issue或PR。
+_注意: 不要使用 1.81.0 - 1.82.1 版本的 cesium, 它包含一个已知的[bug](https://github.com/CesiumGS/cesium/issues/9590)._

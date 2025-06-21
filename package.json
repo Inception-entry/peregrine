@@ -11,7 +11,7 @@
     "lint": "eslint . --ext .vue,.js, .ts"
   },
   "dependencies": {
-    "cesium": "~1.116.0",
+    "cesium": "~1.118.0",
     "cesium-navigation-es6": "^3.0.9",
     "pinia": "^3.0.3",
     "vue": "^3.5.13",
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/runtime-core": "^3.5.17",
     "@vue/tsconfig": "^0.7.0",
     "fast-glob": "^3.3.3",
     "patch-package": "^8.0.0",

@@ -1,31 +1,40 @@
-<script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue'
-</script>
-
 <template>
-  <h1>主页面</h1>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="@/assets/icons/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="h-screen bg-green-200">
+    <overlay v-if="cesiumLoaded">
+      <router-view></router-view>
+    </overlay>
+    <pe-cesium-vue @loaded="loaded" :depthTestAgainstTerrain="true" />
+    <HelloWorld msg="Vite + Vue" />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+<script setup lang="ts">
+import overlay from '@/components/pe-overlay/index.vue'
+import peCesiumVue from '@/components/pe-cesium-vue/index.vue'
+import HelloWorld from '@/components/HelloWorld.vue'
+import { defineComponent, ref } from 'vue'
+defineComponent({
+  name: 'pe-home',
+  components: {
+    overlay,
+    peCesiumVue,
+  },
+  setup() {
+    const cesiumLoaded = ref<boolean>(false)
+    const loaded = (): void => {
+      cesiumLoaded.value = true
+    }
+    return {
+      cesiumLoaded,
+      loaded
+    }
+  },
+})
+</script>
+<style lang="scss" scoped>
+.h-screen.bg-green-200 {
+  position: relative;
+  width: 100dvw;
+  height: 100dvh;
 }
 </style>
