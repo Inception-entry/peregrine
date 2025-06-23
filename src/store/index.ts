@@ -1,13 +1,6 @@
-import { defineStore } from 'pinia'
+import { createPinia } from 'pinia';
 
-export const useStore = defineStore('main', {
-  state: () => ({
-    conut: 0
-  }),
-  actions: {
-    increment() {
-      this.conut++
-    }
-  }
-})
+const store = createPinia();
+
+export { store };
 

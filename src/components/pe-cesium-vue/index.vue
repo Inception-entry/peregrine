@@ -1,5 +1,5 @@
 <template>
-  <div ref="peCesiumVue">
+  <div ref="peCesiumVue" style="width: 100vw; height: 100vh;">
     <slot />
   </div>
 </template>
@@ -112,7 +112,7 @@ export default defineComponent({
     msaa: {
       type: Number,
       default: 1,
-    },
+    }
   },
   setup(props, context) {
     const peCesiumVue = shallowRef<HTMLElement | null>(null)

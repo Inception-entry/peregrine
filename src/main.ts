@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import { Button, ConfigProvider, Dropdown, Menu, message } from 'ant-design-vue';
 import router from './router'
+import { store } from './store';
 import register from './components/pe-global-register'
 
 // global css
@@ -11,7 +13,14 @@ import cesiumVue from '@/libs/cesium/cesium-vue'
 
 const app = createApp(App)
 
-app.use(router).use(cesiumVue)
+app.use(store).use(router).use(cesiumVue)
+
+// 引入antd的组件
+app.use(Button)
+app.use(ConfigProvider)
+app.use(Dropdown)
+app.use(Menu)
+app.config.globalProperties.$message = message;
 
 register(app)
 

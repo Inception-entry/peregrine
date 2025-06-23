@@ -11,6 +11,7 @@
     "lint": "eslint . --ext .vue,.js, .ts"
   },
   "dependencies": {
+    "ant-design-vue": "^4.2.6",
     "cesium": "~1.118.0",
     "cesium-navigation-es6": "^3.0.9",
     "pinia": "^3.0.3",

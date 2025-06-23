@@ -8,25 +8,34 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import overlay from '@/components/pe-overlay/index.vue'
 import peCesiumVue from '@/components/pe-cesium-vue/index.vue'
 import HelloWorld from '@/components/HelloWorld.vue'
-import { defineComponent, ref } from 'vue'
-defineComponent({
+import { defineComponent, ref, computed } from 'vue'
+import { userCounterStore } from '@/store/modules/counter'
+export default defineComponent({
   name: 'pe-home',
   components: {
     overlay,
     peCesiumVue,
+    HelloWorld
   },
   setup() {
     const cesiumLoaded = ref<boolean>(false)
+    const store = userCounterStore()
     const loaded = (): void => {
       cesiumLoaded.value = true
     }
     return {
+      jtCesiumVueContainerStyle: computed(
+        () => {
+          return {
+            height: `calc(100% - ${store.$state.count}px)`
+          }
+      }),
       cesiumLoaded,
-      loaded
+      loaded,
     }
   },
 })
@@ -34,7 +43,7 @@ defineComponent({
 <style lang="scss" scoped>
 .h-screen.bg-green-200 {
   position: relative;
-  width: 100dvw;
-  height: 100dvh;
+  // width: 100%;
+  // height: 100vh;
 }
 </style>

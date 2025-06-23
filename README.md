@@ -3,6 +3,8 @@
 基于 Vue3 + Cesium + typescript 的三维地球项目。
 
 ## 功能特性
+- 根据系统是深色模式或浅色模式，来切换主题色（也可关闭此功能）
+- 同时支持用户自主切换主题色
 
 - 🌏 多种底图切换
   - 高德地图(含纠偏)
@@ -127,7 +129,7 @@ Cesium 相关配置位于 `src/utils/cesiumUtils.js`，包括:
 2. 在 `Map.vue` 中引入并使用
 3. 在 `cesiumUtils.js` 中添加相关工具方法
 
-## <img class="emoji" title=":octocat:" alt=":octocat:" src="https://github.githubassets.com/images/icons/emoji/octocat.png" height="20" width="20" align="absmiddle"> 代码提交规范
+## <img class="emoji" title=":octocat:" alt=":octocat:" src="https://github.githubassets.com/images/icons/emoji/octocat.png" height="38" width="38" align="absmiddle"> 代码提交规范
 
 ```
 git <type>: <subject>
