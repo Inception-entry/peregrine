@@ -7,6 +7,7 @@ import register from './components/pe-global-register'
 
 // global css
 import '@/style/common.scss'
+import '@/style/reset.scss'
 
 // cesium vue
 import cesiumVue from '@/libs/cesium/cesium-vue'
