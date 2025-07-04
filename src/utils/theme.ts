@@ -1,13 +1,13 @@
-const ThemeKey = 'peregrine-theme';
+const themeKey = 'peregrine-theme';
 
 export function getTheme() {
-  return localStorage.getItem(ThemeKey) || '';
+  return localStorage.getItem(themeKey) || '';
 }
 
 export function setTheme(key: string) {
-  localStorage.setItem(ThemeKey, key);
+  localStorage.setItem(themeKey, key);
 }
 
 export function removeTheme() {
-  localStorage.setItem(ThemeKey, '');
+  localStorage.setItem(themeKey, '');
 }

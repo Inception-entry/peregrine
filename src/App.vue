@@ -3,15 +3,22 @@
     :theme="currentTheme"
   >
     <router-view />
-    <switch-Theme @setTheme="setTheme"/>
+    <pe-top-drawer @setCurrentTheme="setCurrentTheme"/>
   </a-config-provider>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
-import SwitchTheme from '@/components/SwitchTheme.vue'
+import i18n from '@/i18n'
+import { ref, provide } from 'vue'
+import PeTopDrawer from '@/components/pe-top-drawer/index.vue'
 
 const currentTheme = ref({})
-const setTheme = (theme: any) => {
+
+const $language = (name: string) => {
+  return i18n.t(name)
+}
+provide('$language', $language);
+
+const setCurrentTheme = (theme: any) => {
   currentTheme.value = theme
 }
 </script>

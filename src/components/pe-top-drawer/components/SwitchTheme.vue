@@ -1,5 +1,5 @@
 <template>
-  <a-dropdown class="switch_theme" :trigger="['click']">
+  <a-dropdown :trigger="['click', 'hover']">
     <template #overlay>
       <a-menu @click="switchTheme">
         <a-menu-item v-for="key in themeArray" :key="key" :class="[{'active_theme': currentThemeKey === key }]">
@@ -9,7 +9,7 @@
       </a-menu>
     </template>
     <a-button>
-      切换主题
+      {{ $t('switchTheme') }}
       <DownOutlined />
     </a-button>
   </a-dropdown>
@@ -20,8 +20,13 @@ import purpleTheme from '@/theme/purpleTheme.json'
 import { reactive, ref } from 'vue'
 import { BgColorsOutlined, DownOutlined } from '@ant-design/icons-vue';
 import { useThemeStore } from '@/store/modules/theme'
+import { inject } from 'vue';
+ 
 const emit = defineEmits(['setTheme'])
 const themeStore = useThemeStore();
+
+// 语言包
+const $t = inject('$language');
 
 const themeMap = reactive(new Map([
   ['greenTheme', greenTheme],
@@ -51,8 +56,6 @@ const switchTheme = (info: any) => {
 </script>
 <style lang="scss" scoped>
 .switch_theme {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+
 }
 </style>

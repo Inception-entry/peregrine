@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import { Button, ConfigProvider, Dropdown, Menu, message } from 'ant-design-vue';
+import { Button, ConfigProvider, Dropdown, Menu, Drawer, message } from 'ant-design-vue';
 import router from './router'
 import { store } from './store';
 import register from './components/pe-global-register'
@@ -21,6 +21,7 @@ app.use(Button)
 app.use(ConfigProvider)
 app.use(Dropdown)
 app.use(Menu)
+app.use(Drawer)
 app.config.globalProperties.$message = message;
 
 register(app)
