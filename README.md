@@ -48,7 +48,7 @@
 - sass 1.89.1
 - Cesium 1.116.0
 - typescript 5.8.3
-- i18next
+- i18next 25.3.0
 
 ## 快速开始
 

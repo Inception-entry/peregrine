@@ -1,5 +1,5 @@
 <template>
-  <a-dropdown class="switch_lang" :trigger="['click', 'hover']">
+  <a-dropdown class="switch_lang" :trigger="['click']">
     <template #overlay>
       <a-menu @click="switchLang">
         <a-menu-item v-for="key in langArray" :key="key" :class="[{'active_lang': currentLangKey === key }]">
@@ -18,13 +18,9 @@
 import { reactive, ref } from 'vue'
 import { BgColorsOutlined, DownOutlined } from '@ant-design/icons-vue';
 import { useLangStore } from '@/store/modules/lang'
-import { inject } from 'vue';
  
 const emit = defineEmits(['setLang'])
 const langStore = useLangStore();
-
-// 语言包
-const $t = inject('$language');
 
 const langMap = reactive(new Map([
   ['zh', '中文'],

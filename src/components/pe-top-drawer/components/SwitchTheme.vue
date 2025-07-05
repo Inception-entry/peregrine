@@ -1,5 +1,5 @@
 <template>
-  <a-dropdown :trigger="['click', 'hover']">
+  <a-dropdown :trigger="['click']">
     <template #overlay>
       <a-menu @click="switchTheme">
         <a-menu-item v-for="key in themeArray" :key="key" :class="[{'active_theme': currentThemeKey === key }]">
@@ -20,12 +20,8 @@ import purpleTheme from '@/theme/purpleTheme.json'
 import { reactive, ref } from 'vue'
 import { BgColorsOutlined, DownOutlined } from '@ant-design/icons-vue';
 import { useThemeStore } from '@/store/modules/theme'
-import { inject } from 'vue';
 
 const themeStore = useThemeStore();
-
-// 语言包
-const $t = inject('$language');
 
 const themeMap = reactive(new Map([
   ['greenTheme', greenTheme],

@@ -11,11 +11,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, inject } from 'vue'
+import { ref } from 'vue'
 defineProps<{ msg: string }>()
 const count = ref(0)
-// 语言包
-const $t = inject('$language');
 </script>
 <style scoped lang="scss">
 .hello_world_wrapper {

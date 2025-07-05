@@ -1,9 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import { Button, ConfigProvider, Dropdown, Menu, Drawer, message } from 'ant-design-vue';
-import router from './router'
 import { store } from './store';
+import router from './router'
 import register from './components/pe-global-register'
+import i18next from "i18next"
+import I18NextVue from "i18next-vue"
 
 // global css
 import '@/style/common.scss'
@@ -14,7 +16,7 @@ import cesiumVue from '@/libs/cesium/cesium-vue'
 
 const app = createApp(App)
 
-app.use(store).use(router).use(cesiumVue)
+app.use(store).use(router).use(I18NextVue, { i18next }).use(cesiumVue)
 
 // 引入antd的组件
 app.use(Button)
