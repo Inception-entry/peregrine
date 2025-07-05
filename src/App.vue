@@ -2,23 +2,23 @@
   <a-config-provider
     :theme="currentTheme"
   >
-    <router-view />
-    <pe-top-drawer @setCurrentTheme="setCurrentTheme"/>
+    <router-view :key="refreshKey" />
   </a-config-provider>
 </template>
 <script setup lang="ts">
 import i18n from '@/i18n'
-import { ref, provide } from 'vue'
-import PeTopDrawer from '@/components/pe-top-drawer/index.vue'
+import { provide, computed } from 'vue'
+import { useLangStore } from '@/store/modules/lang';
+import { useThemeStore } from '@/store/modules/theme'
 
-const currentTheme = ref({})
+const store = useLangStore();
+const themeStore = useThemeStore()
+const refreshKey = computed(() => store.getLang);
+const currentTheme = computed(() => themeStore.getThemeValue);
 
 const $language = (name: string) => {
   return i18n.t(name)
 }
 provide('$language', $language);
 
-const setCurrentTheme = (theme: any) => {
-  currentTheme.value = theme
-}
 </script>

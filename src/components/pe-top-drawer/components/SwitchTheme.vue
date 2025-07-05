@@ -21,8 +21,7 @@ import { reactive, ref } from 'vue'
 import { BgColorsOutlined, DownOutlined } from '@ant-design/icons-vue';
 import { useThemeStore } from '@/store/modules/theme'
 import { inject } from 'vue';
- 
-const emit = defineEmits(['setTheme'])
+
 const themeStore = useThemeStore();
 
 // 语言包
@@ -41,7 +40,7 @@ let currentThemeKey = ref(defaultTheme)
 const currentTheme = ref(themeMap.get(defaultTheme))
 // 设置默认主题色
 themeStore.setTheme(defaultTheme)
-emit('setTheme', currentTheme.value)
+
 
 // 主题色集合
 const themeArray = Array.from(themeMap.keys()); // 获取所有键
@@ -51,7 +50,7 @@ const switchTheme = (info: any) => {
   currentThemeKey = info.key
   currentTheme.value = themeMap.get(info.key)
   themeStore.setTheme(info.key)
-  emit('setTheme', currentTheme.value)
+  themeStore.setThemeValue(currentTheme.value)
 }
 </script>
 <style lang="scss" scoped>

@@ -4,13 +4,11 @@ import { store } from '@/store'
 import { getLang, setLang, removeLang } from '@/utils/lang';
 
 interface ThemeState {
-  lang: object;
   langKey: string;
 }
 
 export const useLangStore = defineStore('lang', {
   state: ():ThemeState => ({
-    lang: {},
     langKey: '',
   }),
   getters: {

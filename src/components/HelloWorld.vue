@@ -1,8 +1,4 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-defineProps<{ msg: string }>()
-const count = ref(0)
-</script>
+
 
 <template>
   <div class="hello_world_wrapper">
@@ -11,10 +7,16 @@ const count = ref(0)
     <div class="card">
       <a-button type="primary" @click="count++">count is {{ count }}</a-button>
     </div>
-    <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+    <p class="read-the-docs">{{ $t('desc') }}</p>
   </div>
 </template>
-
+<script setup lang="ts">
+import { ref, inject } from 'vue'
+defineProps<{ msg: string }>()
+const count = ref(0)
+// 语言包
+const $t = inject('$language');
+</script>
 <style scoped lang="scss">
 .hello_world_wrapper {
   text-align: center;

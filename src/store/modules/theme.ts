@@ -16,12 +16,18 @@ export const useThemeStore = defineStore('theme', {
   getters: {
     getTheme(): string {
       return this.themeKey || getTheme()
+    },
+    getThemeValue(): any {
+      return this.theme || {}
     }
   },
   actions: {
     setTheme(info: string) {
       this.themeKey = info ?? ''; // for null or undefined value
       setTheme(info);
+    },
+    setThemeValue(config: any) {
+      this.theme = config ?? '';
     },
     removeTheme() {
       removeTheme();

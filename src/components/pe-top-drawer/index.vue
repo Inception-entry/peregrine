@@ -8,7 +8,7 @@
     :mask="false"
     :closable="false"
     @close="onClose">
-    <switch-theme @setTheme="setTheme"/>
+    <switch-theme/>
     <switch-lang @setLang="setLang"/>
   </a-drawer>
 </template>
@@ -21,7 +21,6 @@ import i18n from '@/i18n'
 
 const placement = ref<DrawerProps['placement']>('top');
 const open = ref<boolean>(false);
-const emit = defineEmits(['setCurrentTheme'])
 
 const showDrawer = () => {
   open.value = !open.value;
@@ -31,9 +30,6 @@ const onClose = () => {
   open.value = false;
 };
 
-const setTheme = (theme: any) => {
-  emit('setCurrentTheme', theme)
-}
 const setLang = (lng: string) => {
   i18n.changeLanguage(lng, (err, t) => {
     if (err) return console.log('something went wrong loading', err)

@@ -5,6 +5,7 @@
     </overlay>
     <pe-cesium-vue @loaded="loaded" :depthTestAgainstTerrain="true" />
     <HelloWorld msg="Vite + Vue" />
+    <pe-top-drawer/>
   </div>
 </template>
 
@@ -12,28 +13,22 @@
 import overlay from '@/components/pe-overlay/index.vue'
 import peCesiumVue from '@/components/pe-cesium-vue/index.vue'
 import HelloWorld from '@/components/HelloWorld.vue'
-import { defineComponent, ref, computed } from 'vue'
-import { userCounterStore } from '@/store/modules/counter'
+import PeTopDrawer from '@/components/pe-top-drawer/index.vue'
+import { defineComponent, ref } from 'vue'
 export default defineComponent({
   name: 'pe-home',
   components: {
     overlay,
     peCesiumVue,
-    HelloWorld
+    HelloWorld,
+    PeTopDrawer
   },
   setup() {
     const cesiumLoaded = ref<boolean>(false)
-    const store = userCounterStore()
     const loaded = (): void => {
       cesiumLoaded.value = true
     }
     return {
-      jtCesiumVueContainerStyle: computed(
-        () => {
-          return {
-            height: `calc(100% - ${store.$state.count}px)`
-          }
-      }),
       cesiumLoaded,
       loaded,
     }
