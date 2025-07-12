@@ -5,16 +5,26 @@ import { getLayout, setLayout, removeLayout } from '@/utils/layout';
 
 interface LayoutState {
   layoutKey: string;
+  asideStatus: boolean;
+  headerStatus: boolean;
 }
 
 export const useLayoutStore = defineStore('layout', {
   state: ():LayoutState => ({
-    layoutKey: 'classic',
+    layoutKey: 'topLeft',
+    asideStatus: false,
+    headerStatus: false
   }),
   getters: {
     getLayout(): string {
       return this.layoutKey || getLayout()
-    }
+    },
+    getAsideStatus(): boolean {
+      return this.asideStatus
+    },
+    getHeaderStatus(): boolean {
+      return this.headerStatus
+    },
   },
   actions: {
     setLayout(info: string) {
@@ -23,6 +33,12 @@ export const useLayoutStore = defineStore('layout', {
     },
     removeLayout() {
       removeLayout();
+    },
+    setAsideStatus(status: boolean) {
+      this.asideStatus = status ?? ''
+    },
+    setHeaderStatus(status: boolean) {
+      this.headerStatus = status ?? ''
     }
   }
 })

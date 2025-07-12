@@ -4,14 +4,13 @@
     :height="100"
     title=""
     root-class-name="tool-header"
-    :content-wrapper-style="currentLayoutKey === 'topLeft' ? {} : {left: '300px'}"
+    :content-wrapper-style="contentWrapperStyle"
     :force-render="true"
     :placement="placement"
     :open="open"
     :mask="false"
     :closable="false"
-    :z-index="1001"
-    @close="onClose">
+    :z-index="1001">
     <div class="left-control">
       {{ currentLayoutKey  }}
     </div>
@@ -25,7 +24,7 @@
   </a-drawer>
 </template>
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref} from 'vue'
 import { useLayoutStore } from '@/store/modules/layout'
 
 import type { DrawerProps } from 'ant-design-vue';
@@ -37,16 +36,39 @@ defineOptions({ name: 'pe-tool-header' })
 
 const layoutStore = useLayoutStore();
 const currentLayoutKey = computed(() => layoutStore.getLayout)
+const asideStatus = computed(() => layoutStore.getAsideStatus)
+
 
 const placement = ref<DrawerProps['placement']>('top');
 const open = ref<boolean>(false);
 
+const contentWrapperStyle = computed(() => {
+  if (currentLayoutKey.value === 'classic') {
+    if (open.value && asideStatus.value) {
+      return {left: '300px'}
+    } else if (open.value && !asideStatus.value) {
+      return {left: '0'}
+    } else if (!open.value && asideStatus.value) {
+      return {left: '300px'}
+    } else {
+      return {left: '0'}
+    }
+  } else if (currentLayoutKey.value === 'topLeft') {
+    if (open.value && asideStatus.value) {
+      return {left: '0'}
+    } else if (open.value && !asideStatus.value) {
+      return {left: '0'}
+    } else if (asideStatus.value && !open.value) {
+      return {left: '300px'}
+    } else {
+      return {left: '0'}
+    } 
+  }
+})
+
 const showDrawer = () => {
   open.value = !open.value;
-};
-
-const onClose = () => {
-  open.value = false;
+  layoutStore.setHeaderStatus(open.value)
 };
 
 

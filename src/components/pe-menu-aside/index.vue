@@ -1,55 +1,81 @@
 <template>
-  <label :class="['handle', open ? 'drop' : '']" @click="showDrawer"><i class="arrow" /></label>
+  <label :class="['handle', open ? 'drop' : '']" @click="showDrawer">
+    <MenuFoldOutlined v-show="open" :style="{fontSize: '20px'}"/>
+    <MenuUnfoldOutlined v-show="!open" :style="{fontSize: '20px'}"/>
+  </label>
   <a-drawer
     :width="300"
     title=""
     root-class-name="menu-aside"
-    :content-wrapper-style="currentLayoutKey === 'topLeft' ? { top: '100px' } : ''"
+    :content-wrapper-style="contentWrapperStyle"
     :force-render="true"
     :placement="placement"
     :open="open"
     :mask="false"
     :closable="false"
-    :z-index="1000"
-    @close="onClose">
+    :z-index="1000">
   </a-drawer>
 </template>
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import { useLayoutStore } from '@/store/modules/layout'
 import type { DrawerProps } from 'ant-design-vue';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
 
 defineOptions({ name: 'pe-menu-aside' })
 
 const layoutStore = useLayoutStore();
 const currentLayoutKey = computed(() => layoutStore.getLayout)
+const headerStatus = computed(() => layoutStore.getHeaderStatus)
 
 const placement = ref<DrawerProps['placement']>('left');
 const open = ref<boolean>(false);
 
+const contentWrapperStyle = computed(() => {
+  if (currentLayoutKey.value ==='classic') {
+    if (headerStatus.value && open.value) {
+      return {top: '0'}
+    } else if (!headerStatus.value && open.value) {
+      return {top: '0'}
+    } else if (headerStatus.value && !open.value) {
+      return {top: '0'}
+    } else {
+      return {top: '0'}
+    }
+  } else if (currentLayoutKey.value === 'topLeft') {
+    if (headerStatus.value && open.value) {
+      return {top: '100px'}
+    } else if (!headerStatus.value && open.value) {
+      return {top: '0'}
+    } else if (headerStatus.value && !open.value) {
+      return {top: '100px'}
+    } else {
+      return {top: '0'}
+    } 
+  }
+})
+
 const showDrawer = () => {
   open.value = !open.value;
-};
-
-const onClose = () => {
-  open.value = false;
+  layoutStore.setAsideStatus(open.value)
 };
 
 </script>
 <style lang="scss" scoped>
 .handle {
   position: absolute;
-  top: 0;
+  top: 120px;
   left: 0;
-  bottom: 0;
   display: inline-block;
   width: 40px;
-  height: 20px;
+  height: 40px;
+  padding: 10px;
   background-color: rgba(255, 255, 255, 0.4);
-  border-bottom-left-radius: 4px;
+  border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   margin: auto;
   cursor: pointer;
+  box-sizing: border-box;
   transition: all 0.3s;
   i.arrow {
     position: absolute;
