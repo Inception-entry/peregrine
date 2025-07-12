@@ -1,25 +1,30 @@
 <template>
   <label :class="['handle', open ? 'drop' : '']" @click="showDrawer"><i class="arrow" /></label>
   <a-drawer
-    :height="150"
+    :width="300"
     title=""
+    root-class-name="menu-aside"
+    :content-wrapper-style="currentLayoutKey === 'topLeft' ? { top: '100px' } : ''"
+    :force-render="true"
     :placement="placement"
     :open="open"
     :mask="false"
     :closable="false"
+    :z-index="1000"
     @close="onClose">
-    <switch-theme/>
-    <switch-lang @setLang="setLang"/>
   </a-drawer>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useLayoutStore } from '@/store/modules/layout'
 import type { DrawerProps } from 'ant-design-vue';
-import SwitchTheme from '@/components/pe-top-drawer/components/SwitchTheme.vue'
-import SwitchLang from '@/components/pe-top-drawer/components/SwitchLang.vue'
-import i18n from '@/i18n'
 
-const placement = ref<DrawerProps['placement']>('top');
+defineOptions({ name: 'pe-menu-aside' })
+
+const layoutStore = useLayoutStore();
+const currentLayoutKey = computed(() => layoutStore.getLayout)
+
+const placement = ref<DrawerProps['placement']>('left');
 const open = ref<boolean>(false);
 
 const showDrawer = () => {
@@ -30,19 +35,13 @@ const onClose = () => {
   open.value = false;
 };
 
-const setLang = (lng: string) => {
-  i18n.changeLanguage(lng, (err, t) => {
-    if (err) return console.log('something went wrong loading', err)
-    console.log(t('switchLangSuccess'))
-  })
-}
 </script>
 <style lang="scss" scoped>
 .handle {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  bottom: 0;
   display: inline-block;
   width: 40px;
   height: 20px;
@@ -58,7 +57,7 @@ const setLang = (lng: string) => {
     inset-inline-end: 16px;
     width: 10px;
     color: currentcolor;
-    transform: translateY(-50%) translateX(2px);
+    transform: translateY(-50%) translateX(3px);
     transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.3s;
     &::before, &::after {
       position: absolute;
@@ -81,11 +80,17 @@ const setLang = (lng: string) => {
     }
   }
   &.drop {
-    top: 150px;
+    left: 300px;
     i.arrow {
       transform: rotate(180deg) translateX(1px);
       transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.3s;
     }
   }
 }
+
+// 覆盖 drawer 的样式
+:global(.menu-aside .ant-drawer-content) {
+  background-color: rgba(0, 21, 41, 0.4) !important;
+}
+
 </style>

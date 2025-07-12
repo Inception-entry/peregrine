@@ -18,8 +18,8 @@
 import { reactive, ref } from 'vue'
 import { BgColorsOutlined, DownOutlined } from '@ant-design/icons-vue';
 import { useLangStore } from '@/store/modules/lang'
+import i18n from '@/i18n'
  
-const emit = defineEmits(['setLang'])
 const langStore = useLangStore();
 
 const langMap = reactive(new Map([
@@ -30,7 +30,7 @@ const langMap = reactive(new Map([
 // 浏览器中存储的语言；如果没有默认选择中文
 const defaultLang = langStore.getLang || 'zh'
 // 当前默认的语言
-let currentLangKey = ref(defaultLang)
+let currentLangKey: any = ref(defaultLang)
 
 // 语言列表集合
 const langArray = Array.from(langMap.keys());
@@ -39,8 +39,12 @@ const langArray = Array.from(langMap.keys());
 const switchLang = (info: any) => {
   currentLangKey = info.key
   langStore.setLang(info.key)
-  emit('setLang', currentLangKey)
+  i18n.changeLanguage(currentLangKey, (err, t) => {
+    if (err) return console.log('something went wrong loading', err)
+    console.log(t('switchLangSuccess'))
+  })
 }
+
 </script>
 <style lang="scss" scoped>
 .switch_lang {

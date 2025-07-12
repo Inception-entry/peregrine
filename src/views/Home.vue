@@ -5,35 +5,23 @@
     </overlay>
     <pe-cesium-vue @loaded="loaded" :depthTestAgainstTerrain="true" />
     <HelloWorld msg="Vite + Vue" />
-    <pe-top-drawer/>
+    <pe-tool-header />
+    <pe-menu-aside />
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import overlay from '@/components/pe-overlay/index.vue'
 import peCesiumVue from '@/components/pe-cesium-vue/index.vue'
 import HelloWorld from '@/components/HelloWorld.vue'
-import PeTopDrawer from '@/components/pe-top-drawer/index.vue'
-import { defineComponent, ref } from 'vue'
-export default defineComponent({
-  name: 'pe-home',
-  components: {
-    overlay,
-    peCesiumVue,
-    HelloWorld,
-    PeTopDrawer
-  },
-  setup() {
-    const cesiumLoaded = ref<boolean>(false)
-    const loaded = (): void => {
-      cesiumLoaded.value = true
-    }
-    return {
-      cesiumLoaded,
-      loaded,
-    }
-  },
-})
+import PeToolHeader from '@/components/pe-tool-header/index.vue'
+import PeMenuAside from '@/components/pe-menu-aside/index.vue'
+import { ref } from 'vue'
+
+const cesiumLoaded = ref<boolean>(false)
+const loaded = (): void => {
+  cesiumLoaded.value = true
+}
 </script>
 <style lang="scss" scoped>
 .h-screen.bg-green-200 {
