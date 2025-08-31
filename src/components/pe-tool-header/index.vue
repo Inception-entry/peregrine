@@ -58,8 +58,8 @@ const contentWrapperStyle = computed(() => {
       return {left: '0'}
     } else if (open.value && !asideStatus.value) {
       return {left: '0'}
-    } else if (asideStatus.value && !open.value) {
-      return {left: '300px'}
+    } else if (!open.value && asideStatus.value) {
+      return {left: '0'}
     } else {
       return {left: '0'}
     } 
