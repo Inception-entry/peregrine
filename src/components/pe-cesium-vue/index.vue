@@ -183,7 +183,10 @@ export default defineComponent({
       viewer.scene.globe.depthTestAgainstTerrain = props.depthTestAgainstTerrain
       viewer.resolutionScale = window.devicePixelRatio
       viewer.scene.postProcessStages.fxaa.enabled = props.fxaaEnable
-
+      // 鼠标中键修改为地图缩放效果
+      viewer.scene.screenSpaceCameraController.zoomEventTypes = [Cesium.CameraEventType.WHEEL, Cesium.CameraEventType.PINCH]
+      // 鼠标右键修改为地图视角旋转效果
+      viewer.scene.screenSpaceCameraController.tiltEventTypes = [Cesium.CameraEventType.PINCH, Cesium.CameraEventType.RIGHT_DRAG]
       viewer.scene.primitives.removeAll()
 
       //eslint-disable-next-line
