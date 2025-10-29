@@ -1,7 +1,7 @@
 <template>
   <label :class="['handle', open ? 'drop' : '']" @click="showDrawer"><i class="arrow" /></label>
   <a-drawer
-    :height="100"
+    :height="130"
     title=""
     root-class-name="tool-header"
     :content-wrapper-style="contentWrapperStyle"
@@ -15,7 +15,13 @@
       {{ currentLayoutKey  }}
     </div>
     <div class="center-control">
-      <switch-layout />
+      <a-tabs v-model:activeKey="activeKey" type="card">
+        <a-tab-pane key="1" tab="Tab 1">
+          <switch-layout />
+        </a-tab-pane>
+        <a-tab-pane key="2" tab="Tab 2" force-render>Content of Tab Pane 2</a-tab-pane>
+        <a-tab-pane key="3" tab="Tab 3">Content of Tab Pane 3</a-tab-pane>
+      </a-tabs>
     </div>
     <div class="right-control">
       <switch-theme />
@@ -24,7 +30,7 @@
   </a-drawer>
 </template>
 <script lang="ts" setup>
-import { computed, ref} from 'vue'
+import { computed, ref } from 'vue'
 import { useLayoutStore } from '@/store/modules/layout'
 
 import type { DrawerProps } from 'ant-design-vue';
@@ -71,6 +77,7 @@ const showDrawer = () => {
   layoutStore.setHeaderStatus(open.value)
 };
 
+const activeKey = ref('1');
 
 </script>
 <style lang="scss" scoped>
@@ -117,7 +124,7 @@ const showDrawer = () => {
     }
   }
   &.drop {
-    top: 100px;
+    top: 130px;
     i.arrow {
       transform: rotate(180deg) translateX(1px);
       transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.3s;
@@ -133,6 +140,21 @@ const showDrawer = () => {
   flex: 0 1 auto;
 }
 
+.center-control {
+  background-color: #e5e7eb;
+  .ant-tabs {
+    color: #fff;
+    :deep(.ant-tabs-tab) {
+      border-radius: 0;
+      border: none;
+      background-color: rgb(107 114 128 / 1);
+      &.ant-tabs-tab-active {
+        border: none;
+      }
+    }
+  }
+}
+
 // 覆盖 drawer 的样式
 :global(.tool-header .ant-drawer-content) {
   background-color: rgba(0, 21, 41, 0.4);
@@ -140,5 +162,6 @@ const showDrawer = () => {
 :global(.tool-header .ant-drawer-body) {
   display: flex;
   justify-content: space-between;
+  padding: 0;
 }
 </style>

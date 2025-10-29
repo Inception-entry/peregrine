@@ -45,11 +45,11 @@ const contentWrapperStyle = computed(() => {
     }
   } else if (currentLayoutKey.value === 'topLeft') {
     if (headerStatus.value && open.value) {
-      return {top: '100px'}
+      return {top: '130px'}
     } else if (!headerStatus.value && open.value) {
       return {top: '0'}
     } else if (headerStatus.value && !open.value) {
-      return {top: '100px'}
+      return {top: '130px'}
     } else {
       return {top: '0'}
     } 
@@ -65,7 +65,7 @@ const showDrawer = () => {
 <style lang="scss" scoped>
 .handle {
   position: absolute;
-  top: 120px;
+  top: 150px;
   left: 0;
   display: inline-block;
   width: 40px;
@@ -113,6 +113,10 @@ const showDrawer = () => {
       transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.3s;
     }
   }
+}
+
+:global(.menu-aside) {
+  outline: none;
 }
 
 // 覆盖 drawer 的样式
