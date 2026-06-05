@@ -6,7 +6,7 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-   plugins: [
+  plugins: [
     vue(),
     cesium(),
     createSvgIconsPlugin({
@@ -27,7 +27,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    port: 8888,
     host: true,
     open: true,
   }

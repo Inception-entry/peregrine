@@ -31,7 +31,7 @@ const themeMap = reactive(new Map([
 // 浏览器中存储的主题key；如果没有默认选择一个主题key
 const defaultTheme = themeStore.getTheme || 'greenTheme'
 // 当前默认的主题key
-let currentThemeKey = ref(defaultTheme)
+const currentThemeKey = ref(defaultTheme)
 // 当前默认的主题配置
 const currentTheme = ref(themeMap.get(defaultTheme))
 // 设置默认主题色
@@ -43,7 +43,7 @@ const themeArray = Array.from(themeMap.keys()); // 获取所有键
 
 // 切换主题色
 const switchTheme = (info: any) => {
-  currentThemeKey = info.key
+  currentThemeKey.value = info.key
   currentTheme.value = themeMap.get(info.key)
   themeStore.setTheme(info.key)
   themeStore.setThemeValue(currentTheme.value)

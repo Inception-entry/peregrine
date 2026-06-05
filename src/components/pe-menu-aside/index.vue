@@ -54,6 +54,7 @@ const contentWrapperStyle = computed(() => {
       return {top: '0'}
     } 
   }
+  return {top: '0'}
 })
 
 const showDrawer = () => {
